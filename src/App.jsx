@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { lazy, Suspense } from "react";
 const Home = lazy(() => import("./pages/Home"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
-const ContactUs = lazy(() => import("./pages/ContactUs"));
+const ContactUs = lazy(() => import("./pages/Contact.jsx"));
 // const Products = lazy(() => import("./pages/Products"));
 // const Product = lazy(() => import("./pages/Product"));
 

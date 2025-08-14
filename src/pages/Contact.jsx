@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
@@ -88,14 +88,10 @@ const genericKeywords = [
   "Top-rated air purifiers for elderly wellness",
 ];
 
-
 const TELEGRAM_BOT_TOKEN = "7861311787:AAFetB2etaxa8ExgR6JFQKf7pItHxowRoCw";
 const TELEGRAM_CHAT_ID = "-4779738772";
 
-
 const ContactUs = () => {
-
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -148,55 +144,53 @@ const ContactUs = () => {
     }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSending(true);
 
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setSending(true);
-
-  if (!validateForm()) {
-    toast.error("Please fix the errors before submitting.");
-    setSending(false);
-    return;
-  }
-
-  if (!agree) {
-    toast.error("You must agree to the privacy policy.");
-    setSending(false);
-    return;
-  }
-
-  try {
-    const text = `New Enquiry Submission:\n\nFirst Name: ${formData.firstName}\nLast Name: ${formData.lastName}\nEmail: ${formData.email}\nPhone: ${formData.phone}`;
-
-    const encodedText = encodeURIComponent(text);
-
-    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodedText}`;
-
-    const response = await fetch(url, {
-      method: "GET",
-    });
-
-    const result = await response.json();
-    if (result.ok) {
-      toast.success("Message Sent Successfully!");
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-      });
-      setAgree(false);
-    } else {
-      throw new Error("Telegram error: " + result.description);
+    if (!validateForm()) {
+      toast.error("Please fix the errors before submitting.");
+      setSending(false);
+      return;
     }
-  } catch (error) {
-    console.error("Telegram Bot Error:", error);
-    toast.error(`Failed to send`);
-  } finally {
-    setSending(false);
-  }
-};
+
+    if (!agree) {
+      toast.error("You must agree to the privacy policy.");
+      setSending(false);
+      return;
+    }
+
+    try {
+      const text = `New Enquiry Submission:\n\nFirst Name: ${formData.firstName}\nLast Name: ${formData.lastName}\nEmail: ${formData.email}\nPhone: ${formData.phone}`;
+
+      const encodedText = encodeURIComponent(text);
+
+      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodedText}`;
+
+      const response = await fetch(url, {
+        method: "GET",
+      });
+
+      const result = await response.json();
+      if (result.ok) {
+        toast.success("Message Sent Successfully!");
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+        });
+        setAgree(false);
+      } else {
+        throw new Error("Telegram error: " + result.description);
+      }
+    } catch (error) {
+      console.error("Telegram Bot Error:", error);
+      toast.error(`Failed to send`);
+    } finally {
+      setSending(false);
+    }
+  };
   return (
     <div className="flex flex-col md:flex-row min-h-screen max-md:items-center">
       <Helmet>
@@ -207,7 +201,6 @@ const handleSubmit = async (e) => {
         />
         <meta name="keywords" content={genericKeywords.join(", ")} />
       </Helmet>
-
 
       <div className="md:w-[40%] max-md:mt-[80px] h-screen max-md:hidden">
         <img
@@ -309,8 +302,6 @@ const handleSubmit = async (e) => {
       </div>
 
       <div className="w-[60%] h-[7px] bg-primary my-[50px] md:hidden"></div>
-
-
     </div>
   );
 };
