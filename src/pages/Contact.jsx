@@ -88,8 +88,8 @@ const genericKeywords = [
   "Top-rated air purifiers for elderly wellness",
 ];
 
-const TELEGRAM_BOT_TOKEN = "7861311787:AAFetB2etaxa8ExgR6JFQKf7pItHxowRoCw";
-const TELEGRAM_CHAT_ID = "-4779738772";
+const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID;
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
